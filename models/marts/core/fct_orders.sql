@@ -6,7 +6,7 @@ orders as (
     select * from {{ ref('stg_orders') }}
 ),
 
-{# sum of amount per order#}
+{# sum of amount per unique order_id with success status #}
 order_payments as (
     select
         order_id,
@@ -21,8 +21,11 @@ joined as (
         order_id,
         customer_id,
         order_date,
+        
+        {# If there is a order with a null amount, replace with 0 #}
         coalesce(order_payments.amount,0) as amount
 
+    {# Filters out customers with no orders #}
     from orders
     left join order_payments using (order_id)
 )

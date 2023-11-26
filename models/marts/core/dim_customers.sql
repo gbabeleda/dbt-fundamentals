@@ -17,7 +17,7 @@ customer_orders as (
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders,
 
-        {# This is correct. #}
+        {# This is correct #}
         sum(amount) as lifetime_value
 
     from orders
@@ -35,9 +35,10 @@ final as (
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
         
+        {# If the customer hasnt ordered yet, will be null, thus replace with 0 #}
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
         
-        {# This is correct. coalesce returns 0 for customers who havent made an order yet, which returns null values without coalesce. #}
+        {# This is correct. coalesce returns 0 for customers who havent made an order yet, which returns null values without coalesce #}
         coalesce(lifetime_value,0) as lifetime_value
 
     from customers
