@@ -7,11 +7,22 @@ sources:
     tables:
       - name: customers
       - name: orders
-    
-  - name: stripe
-    database: dbt-tutorial
-    schema: stripe
-    tables:
-      - name: payment
+        # source freshness for a specific field in a table
+        loaded_at_field: _etl_loaded_at
+        freshness: 
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 2
+            period: day
+       
+  # This works just as well as if you made another src file for the other schema. When in the same folder
+  # - name: stripe
+  #   database: dbt-tutorial
+  #   schema: stripe
+  #   tables:
+  #     - name: payment
+
 
   
