@@ -2,14 +2,14 @@ version: 2
 
 sources:
   - name: jaffle_shop
-    database: dbt_tutorial
+    database: dbt-tutorial
     schema: jaffle_shop
     tables:
       - name: customers
       - name: orders
     
   - name: stripe
-    database: dbt_tutorial
+    database: dbt-tutorial
     schema: stripe
     tables:
       - name: payment
