@@ -5,7 +5,10 @@ with payments as (
         orderid as order_id,
         status,
         paymentmethod as payment_method,
-        amount / 100 as amount     
+        amount / 100 as amount,
+
+        {# Extra credit for checking source freshness #}
+        _batched_at
     
     from {{ source('stripe', 'payment') }}
 
