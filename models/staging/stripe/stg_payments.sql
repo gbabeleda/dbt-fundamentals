@@ -5,6 +5,8 @@ with payments as (
         orderid as order_id,
         status,
         paymentmethod as payment_method,
+
+        {# Stored in cents #}
         amount / 100 as amount,
 
         {# Extra credit for checking source freshness #}
