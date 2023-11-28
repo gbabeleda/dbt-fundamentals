@@ -7,7 +7,17 @@ sources:
     schema: jaffle_shop
     tables:
       - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
       - name: orders
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
         # source freshness for a specific field in a table
         loaded_at_field: _etl_loaded_at
         freshness: 
