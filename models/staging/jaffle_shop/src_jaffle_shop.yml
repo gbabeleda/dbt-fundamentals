@@ -1,3 +1,4 @@
+# This is a source file for jaffle_shop staging sub-directory
 version: 2
 
 sources:
@@ -6,7 +7,17 @@ sources:
     schema: jaffle_shop
     tables:
       - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
       - name: orders
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
         # source freshness for a specific field in a table
         loaded_at_field: _etl_loaded_at
         freshness: 
@@ -17,7 +28,9 @@ sources:
             count: 2
             period: day
        
-  # This works just as well as if you made another src file for the other schema. When in the same folder
+# You can likely use a single src file for all of your raw tables/sources.
+# Doing the below in this same file worked as did seperating it out into src_jaffle_shop and src_stripe
+
   # - name: stripe
   #   database: dbt-tutorial
   #   schema: stripe
